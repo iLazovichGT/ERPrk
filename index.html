@@ -30,12 +30,18 @@
       font-family: system-ui, -apple-system, sans-serif;
       color: #1A1B2E;
       display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 20px;
+      flex-direction: column; gap: 22px;
       -webkit-text-size-adjust: 100%;
       overflow: hidden; overscroll-behavior: none;
     }
-    img { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 8px 24px rgba(0,0,0,.22); }
-    .t { font-size: 20px; font-weight: 700;
+    /* ВИД = заставка приложения (00_index.html #loader / экран «Загрузка»): иконка 88px, белая окантовка
+       + тень, название 18px, кольцо 84px, «Загрузка» 16px. Две заставки идут подряд — должны совпадать. */
+    .logo { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    img { width: 88px; height: 88px; border-radius: 20px; box-shadow: 0 0 0 2px rgba(255,255,255,.9), 0 8px 24px rgba(0,0,0,.22); }
+    .ring { animation: spin .8s linear infinite; transform-origin: 42px 42px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .load { font-size: 16px; font-weight: 500; color: #B8B8C8; }
+    .t { font-size: 18px; font-weight: 700;
          background: linear-gradient(135deg, #6C5CE7, #A388EE);
          -webkit-background-clip: text; background-clip: text;
          -webkit-text-fill-color: transparent; }
@@ -171,9 +177,17 @@
   </script>
 </head>
 <body>
-  <img src="apple-touch-icon.png" alt="Ровный контур">
-  <div class="t">Ровный контур</div>
-  <div class="s" id="hint">Открываем приложение…</div>
+  <div class="logo">
+    <img src="apple-touch-icon.png" alt="Ровный контур">
+    <div class="t">Ровный контур</div>
+  </div>
+  <div class="s" id="hint">
+    <svg width="84" height="84" viewBox="0 0 84 84" style="display:block;margin:0 auto">
+      <circle cx="42" cy="42" r="34" fill="none" stroke="#2A2A38" stroke-width="5"/>
+      <circle class="ring" cx="42" cy="42" r="34" fill="none" stroke="#6C5CE7" stroke-width="5" stroke-linecap="round" stroke-dasharray="53.4 213.6"/>
+    </svg>
+    <div class="load" style="margin-top:22px;text-align:center">Загрузка</div>
+  </div>
 
   <script>
     // Обычная вкладка (не с иконки): на ТЕЛЕФОНЕ — инструкция «На экран Домой» + ссылка;
